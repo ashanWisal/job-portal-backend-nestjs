@@ -16,9 +16,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
+  async validate(payload: any): Promise<any> {
     // Optionally fetch fresh user data from DB
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prisma.user.findFirst({
       where: { id: payload.id },
     });
 
@@ -34,3 +34,5 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     };
   }
 }
+
+// jwt strategey using passport strategy it does how the token is verified and decoded
